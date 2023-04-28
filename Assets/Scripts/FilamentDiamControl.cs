@@ -22,6 +22,9 @@ public class FilamentDiamControl : MonoBehaviour
     //LineGenerator Reference
     public GameObject LineGenerator;
 
+    //NEW LINE OBJECT REFERENCE 
+    public GameObject LineObject;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +50,10 @@ public class FilamentDiamControl : MonoBehaviour
         
         //Set textbox to diameter current value
         ipText.text = diameter.ToString("0.0"); //Format to decimal
+
+        //NEW IMPLEMENTATION 
+        LineObject.GetComponent<NewAnimateLine>().EndW = diameter;
+
     }
 
     //Done on EDITOR ipText.OnDeselect
@@ -63,6 +70,10 @@ public class FilamentDiamControl : MonoBehaviour
         LineGenerator.GetComponent<SubdivideLine>().EndWidth = diameter;
         LineGenerator.GetComponent<SubdivideLine>().EndTime = this.GetComponent<FilamentSpoolingControl>().SegmentTime;
 
+        //Set diameter slider to corresponding position
         diamSlider.SetValueWithoutNotify((slideval / maxDiam) * 100f);
+
+        //NEW IMPLEMENTATION 
+        LineObject.GetComponent<NewAnimateLine>().EndW = diameter;
     }
 }
