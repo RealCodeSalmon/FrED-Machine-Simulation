@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Globalization;
 using TMPro;
 using UnityEngine;
@@ -34,6 +32,8 @@ public class FilamentSpoolingControl : MonoBehaviour
 
     //Tangential velocity
     [SerializeField]private float tanVelocity;
+
+    public float TanVelocity { get { return tanVelocity; } }
     
     //Extracted filament
     [SerializeField] private float extFilament;
@@ -43,13 +43,6 @@ public class FilamentSpoolingControl : MonoBehaviour
     private int coilTurns;
 
     //Extrusion time and segment time
-    private float extTime;
-    private float segmentTime;
-
-    public float SegmentTime
-    {
-        get { return segmentTime; }
-    }
 
     //Inverse rotation
     [SerializeField]private float sec4Rotation; //Inverse rotation is used to determine circle animation duration in seconds 
@@ -84,9 +77,6 @@ public class FilamentSpoolingControl : MonoBehaviour
         //Extracted Filament indicator
         extFilament += tanVelocity * Time.deltaTime;
         extFilamentText.text = extFilament.ToString("0.0");
-
-        extTime = LineGenerator.GetComponent<SubdivideLine>().TotalDistance * 8/ tanVelocity;
-        segmentTime = extTime / (LineGenerator.GetComponent<SubdivideLine>().NDivisions * 8);
 
         sec4Rotation = 360 / rVelocity * corrFactor;
         CircleGenerator.GetComponent<TestCircleGenerator>().AnimDuration= sec4Rotation;

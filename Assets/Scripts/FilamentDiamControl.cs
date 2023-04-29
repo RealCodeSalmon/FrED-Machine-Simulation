@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Globalization;
 using TMPro;
 using UnityEngine;
@@ -42,11 +40,6 @@ public class FilamentDiamControl : MonoBehaviour
     //Done on EDITOR Slider.OnValueChanged
     public void FillTextBox()
     {
-        //Setup newStartWidth and EndWidth 
-        float newStartWidth = LineGenerator.GetComponent<SubdivideLine>().EndWidth;
-        LineGenerator.GetComponent<SubdivideLine>().StartWidth = newStartWidth;
-        LineGenerator.GetComponent<SubdivideLine>().EndWidth = diameter;
-        LineGenerator.GetComponent<SubdivideLine>().EndTime = this.GetComponent<FilamentSpoolingControl>().SegmentTime;
         
         //Set textbox to diameter current value
         ipText.text = diameter.ToString("0.0"); //Format to decimal
@@ -64,12 +57,6 @@ public class FilamentDiamControl : MonoBehaviour
         slideval = Mathf.Clamp(slideval, minDiam, maxDiam);
         diameter = slideval;
         
-        //Setup newStartWidth and EndWidth 
-        float newStartWidth = LineGenerator.GetComponent<SubdivideLine>().EndWidth;
-        LineGenerator.GetComponent<SubdivideLine>().StartWidth = newStartWidth;
-        LineGenerator.GetComponent<SubdivideLine>().EndWidth = diameter;
-        LineGenerator.GetComponent<SubdivideLine>().EndTime = this.GetComponent<FilamentSpoolingControl>().SegmentTime;
-
         //Set diameter slider to corresponding position
         diamSlider.SetValueWithoutNotify((slideval / maxDiam) * 100f);
 
